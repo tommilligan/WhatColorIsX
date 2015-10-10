@@ -11,6 +11,7 @@ setup(name='WhatColorIsX',
       classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
+        'Operating System :: OS Independent',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
         'Natural Language :: English',
