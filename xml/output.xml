@@ -1,0 +1,11 @@
+<foo>
+    <bar>
+        <name>sky</name>
+    <color>#769ab8</color></bar>
+    <bar>
+        <name>sun</name>
+    <color>#873107</color></bar>
+    <bar>
+        <name>grass</name>
+    <color>#3e840f</color></bar>
+</foo>

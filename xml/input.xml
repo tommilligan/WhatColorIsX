@@ -1,0 +1,11 @@
+<foo>
+    <bar>
+        <name>sky</name>
+    </bar>
+    <bar>
+        <name>sun</name>
+    </bar>
+    <bar>
+        <name>grass</name>
+    </bar>
+</foo>

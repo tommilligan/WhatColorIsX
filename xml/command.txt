@@ -1,0 +1,1 @@
+python xmlInterface.py input.xml output.xml bar name color
