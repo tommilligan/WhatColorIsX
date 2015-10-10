@@ -15,13 +15,13 @@ setup(name='WhatColorIsX',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
         'Natural Language :: English',
-        'Programming Language :: Python :: 2.7'
+        'Programming Language :: Python'
       ],
       keywords='colour color google image text search',
       packages=['.'],
       install_requires=[
           'colour',
           'simplejson',
-          'pillow'
+          'Pillow'
       ]
 )

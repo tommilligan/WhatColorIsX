@@ -2,7 +2,13 @@
 Python script which takes any string and returns a hex colour string, using Google image search.
 
 ## Installation
-```pip install WhatColorIsX```
+```
+pip install WhatColorIsX
+```
+You may find you need to install Pillow as a dependency first.
+```
+pip install Pillow
+```
 
 ## Usage
 Input can be any string. Output is a valid hex colour value (3 or 6 digit).

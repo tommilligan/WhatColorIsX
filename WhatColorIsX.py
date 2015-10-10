@@ -53,4 +53,4 @@ if __name__ == '__main__':
     parser.add_argument('string', help='string to find colour of')
     parser.add_argument('-b', '--bright_hue', action='store_true', help='return a bright colour; hsl=(x,1.0,0.5)')
     args = parser.parse_args()
-    print what_color(args.string, bright_hue=args.bright_hue)
+    print(what_color(args.string, bright_hue=args.bright_hue))
