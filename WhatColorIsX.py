@@ -1,10 +1,17 @@
 from PIL import Image
 import argparse
-import urllib
-import urllib2
 import simplejson
-import cStringIO
 from colour import Color
+try:
+    # Python 2
+    from urllib import quote_plus
+    from urllib2 import urlopen
+    from cStringIO import StringIO as BytesIO
+except ImportError:
+    # Python 3
+    from urllib.parse import quote_plus
+    from urllib.request import urlopen
+    from io import BytesIO
 
 def average_image_color(i): # Takes image, returns rgb - http://stackoverflow.com/questions/29726148/finding-average-color-using-python
 	h = i.histogram()
@@ -23,16 +30,15 @@ def average_image_color(i): # Takes image, returns rgb - http://stackoverflow.co
 	)
     
 def get_image(searchTerm): # Takes string, returns image - http://stackoverflow.com/questions/20716842/python-download-images-from-google-image-search
-    fetcher = urllib2.build_opener()
     startIndex = 0
-    searchUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + urllib.quote_plus(searchTerm) + "&start=" + str(startIndex)
-    f = fetcher.open(searchUrl)
+    searchUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + quote_plus(searchTerm) + "&start=" + str(startIndex)
+    f = urlopen(searchUrl)
     deserialized_output = simplejson.load(f)
     # 4 image URLs returned - take first one that doesn't IOerror and is RGB(A) format
     for i in range(4):
         imageUrl = deserialized_output['responseData']['results'][i]['unescapedUrl']
         try:
-            file = cStringIO.StringIO(urllib.urlopen(imageUrl).read())
+            file = BytesIO(urlopen(imageUrl).read())
             img = Image.open(file)
         except IOError:
             continue
