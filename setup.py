@@ -18,7 +18,7 @@ setup(name='WhatColorIsX',
         'Programming Language :: Python'
       ],
       keywords='colour color google image text search',
-      packages=['.'],
+      py_modules=['WhatColorIsX'],
       install_requires=[
           'colour',
           'simplejson',
