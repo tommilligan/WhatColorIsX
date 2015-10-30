@@ -46,7 +46,7 @@ def get_image(searchTerm): # Takes string, returns image - http://stackoverflow.
             return img
     return False
 
-def what_color(searchTerm, bright_hue=False): # Takes string, returns hex
+def whatcoloris(searchTerm, bright_hue=False): # Takes string, returns hex
     img = get_image(searchTerm)
     avg = average_image_color(img)
     color = Color(rgb=[float(avg[x])/255.0 for x in range(3)])
@@ -59,7 +59,7 @@ def main():
     parser.add_argument('x', help='string to find colour of')
     parser.add_argument('-b', '--bright_hue', action='store_true', help='return a bright colour; hsl=(x,1.0,0.5)')
     args = parser.parse_args()
-    return what_color(args.x, bright_hue=args.bright_hue)
+    return whatcoloris(args.x, bright_hue=args.bright_hue)
     
 if __name__ == '__main__':
     sys.exit(main())
