@@ -23,5 +23,10 @@ setup(name='WhatColorIsX',
           'colour',
           'simplejson',
           'Pillow'
-      ]
+      ],
+      entry_points={
+        'console_scripts': [
+            'whatcoloris = WhatColorIsX:main'
+        ]
+      }
 )

@@ -53,10 +53,13 @@ def what_color(searchTerm, bright_hue=False): # Takes string, returns hex
     if bright_hue is True:
         color = Color(hue=color.hue, saturation=1.0, luminance=0.5)
     return color.hex
-    
-if __name__ == '__main__':
+
+def main():
     parser = argparse.ArgumentParser(description='Returns colour of string based on Google image search.')
-    parser.add_argument('string', help='string to find colour of')
+    parser.add_argument('x', help='string to find colour of')
     parser.add_argument('-b', '--bright_hue', action='store_true', help='return a bright colour; hsl=(x,1.0,0.5)')
     args = parser.parse_args()
-    print(what_color(args.string, bright_hue=args.bright_hue))
+    return what_color(args.x, bright_hue=args.bright_hue)
+    
+if __name__ == '__main__':
+    sys.exit(main())
