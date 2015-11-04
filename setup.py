@@ -28,5 +28,7 @@ setup(name='WhatColorIsX',
         'console_scripts': [
             'whatcoloris = WhatColorIsX:main'
         ]
-      }
+      },
+      test_suite='nose.collector',
+      tests_require=['nose']
 )

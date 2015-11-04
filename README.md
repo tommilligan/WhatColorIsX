@@ -8,7 +8,7 @@ pip install WhatColorIsX
 You may find you need to ```pip install Pillow``` as a dependency first, although it will be attempted automatically.
 
 ## Usage
-Input can be any string. Output is a valid hex colour value (3 or 6 digit).
+Input can be any string. Output is a 6-digit hex colour value (#[0-9a-f]{6}).
 
 WhatColorIsX returns an accurate colour value by default. If bright_hue is set to ```True```, it is guaranteed that a bright colour will be returned. If bright_hue is not set, it is likely that some whites, greys or blacks will be returned.
 
@@ -30,7 +30,7 @@ whatcoloris sky
 It can also be called directly
 ```
 python WhatColorIsX.py grass -b
->>> #6f0
+>>> #65ff00
 ```
 
 ## Additional Scripts
