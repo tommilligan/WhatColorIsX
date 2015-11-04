@@ -1,10 +1,12 @@
 import os
 
+
 from WhatColorIsX import whatcoloris
 from PIL import Image
 
 
 TEST_IMAGES_DIR = os.path.join('tests', 'img')
+
 
 def test_known_images():   
     known_images = {'red.jpg': '#fe0000',

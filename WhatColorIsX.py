@@ -3,20 +3,12 @@
 import argparse
 import json
 import codecs
+import urllib.parse
+import urllib.request
+import io
 
 from colour import Color
 from PIL import Image
-
-try:
-    # Python 2
-    from urllib import quote_plus
-    from urllib2 import urlopen
-    from cStringIO import StringIO as BytesIO
-except ImportError:
-    # Python 3
-    from urllib.parse import quote_plus
-    from urllib.request import urlopen
-    from io import BytesIO
 
 
 def average_image_color(img):
@@ -29,6 +21,7 @@ def average_image_color(img):
     :returns: RGB value in a three-member tuple
     :rtype: tuple
     """
+    img = img.convert('RGB')
     h = img.histogram()
     # split into red, green, blue
     r = h[0:256]
@@ -54,15 +47,15 @@ def get_image(searchTerm):
     :rtype: `PIL.Image.Image`
     """
     startIndex = 0
-    searchUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + quote_plus(searchTerm) + "&start=" + str(startIndex)
-    f = urlopen(searchUrl)   
+    searchUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + urllib.parse.quote_plus(searchTerm) + "&start=" + str(startIndex)
+    f = urllib.request.urlopen(searchUrl)   
     reader = codecs.getreader("utf-8")
     deserialized_output = json.load(reader(f))
     # 4 image URLs returned - take first one that doesn't IOerror and is RGB(A) format
     for i in range(4):
         imageUrl = deserialized_output['responseData']['results'][i]['unescapedUrl']
         try:
-            file = BytesIO(urlopen(imageUrl).read())
+            file = io.BytesIO(urllib.request.urlopen(imageUrl).read())
             img = Image.open(file)
         except IOError:
             continue
@@ -106,7 +99,6 @@ def whatcoloris(search_string, bright_hue=False, is_file=False):
         img = Image.open(search_string)
     else:
         img = get_image(search_string)
-    img = img.convert('RGB')
     return whatcoloris_image(img, bright_hue=bright_hue)
 
 
