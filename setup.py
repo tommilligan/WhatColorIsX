@@ -1,9 +1,16 @@
 from setuptools import setup
 
+# This imports __version__
+execfile('_version.py')
+
+def readme():
+    with open('README.rst') as f:
+        return f.read()
+
 setup(name='WhatColorIsX',
-      version='1.0.0',
-      description='Get color of a string via Google iamge search API',
-      long_description='Using the Google image search API, this allows a string to be converted into a (usually) related hex color value.',
+      version=__version__,
+      description='Get color of a string via Google image search API',
+      long_description=readme()
       url='https://github.com/tommilligan/WhatColorIsX',
       author='Tom Milligan',
       author_email='code@tommilligan.net',
@@ -15,7 +22,9 @@ setup(name='WhatColorIsX',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
         'Natural Language :: English',
-        'Programming Language :: Python :: 3'
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5'
       ],
       keywords='colour color google image text search find get string',
       py_modules=['WhatColorIsX'],

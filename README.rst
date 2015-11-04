@@ -6,9 +6,14 @@ image search.
 
 master:
 """""""
+
+.. image:: https://img.shields.io/pypi/pyversions/WhatColorIsX.svg
+    :target: https://pypi.python.org/pypi/WhatColorIsX
+    :alt: Supported Python versions
+
 .. image:: http://img.shields.io/pypi/v/WhatColorIsX.svg?style=flat
-   :target: https://pypi.python.org/pypi/WhatColorIsX/
-   :alt: Latest PyPI version
+    :target: https://pypi.python.org/pypi/WhatColorIsX/
+    :alt: Latest PyPI version
 
 .. image:: https://travis-ci.org/tommilligan/WhatColorIsX.svg?branch=master
     :target: https://travis-ci.org/tommilligan/WhatColorIsX
@@ -17,7 +22,7 @@ master:
 .. image:: https://coveralls.io/repos/tommilligan/WhatColorIsX/badge.svg?branch=master&service=github
     :target: https://coveralls.io/github/tommilligan/WhatColorIsX?branch=master
     :alt: Coveralls coverage status
-
+    
 dev:
 """"
 
