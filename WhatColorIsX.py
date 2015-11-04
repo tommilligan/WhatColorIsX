@@ -76,7 +76,6 @@ def search_image(search_string, images_to_try=10):
                     file = io.BytesIO(urllib.request.urlopen(imageUrl).read())
                     img = Image.open(file)
                 except IOError:
-                    print('!IOERROR')
                     continue
                 if (img.mode == "RGB" or img.mode == "RGBA"):
                     return img
