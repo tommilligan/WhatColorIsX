@@ -1,7 +1,6 @@
 from setuptools import setup
 
-# This imports __version__
-execfile('_version.py')
+version = '1.0.1'
 
 # Call this to get README
 def readme():
