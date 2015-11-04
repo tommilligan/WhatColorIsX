@@ -3,6 +3,7 @@ from setuptools import setup
 # This imports __version__
 execfile('_version.py')
 
+# Call this to get README
 def readme():
     with open('README.rst') as f:
         return f.read()
@@ -10,7 +11,7 @@ def readme():
 setup(name='WhatColorIsX',
       version=__version__,
       description='Get color of a string via Google image search API',
-      long_description=readme()
+      long_description=readme(),
       url='https://github.com/tommilligan/WhatColorIsX',
       author='Tom Milligan',
       author_email='code@tommilligan.net',
