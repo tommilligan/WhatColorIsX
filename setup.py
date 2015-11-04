@@ -8,7 +8,7 @@ def readme():
         return f.read()
 
 setup(name='WhatColorIsX',
-      version=__version__,
+      version=version,
       description='Get color of a string via Google image search API',
       long_description=readme(),
       url='https://github.com/tommilligan/WhatColorIsX',
