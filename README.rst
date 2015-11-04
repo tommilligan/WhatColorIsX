@@ -4,8 +4,7 @@ WhatColorIsX
 Python script which takes any string and returns a hex colour string, using Google
 image search.
 
-master:
-"""""""
+**master:**
 
 .. image:: https://img.shields.io/pypi/pyversions/WhatColorIsX.svg
     :target: https://pypi.python.org/pypi/WhatColorIsX
@@ -23,8 +22,7 @@ master:
     :target: https://coveralls.io/github/tommilligan/WhatColorIsX?branch=master
     :alt: Coveralls coverage status
     
-dev:
-""""
+**dev:**
 
 .. image:: https://travis-ci.org/tommilligan/WhatColorIsX.svg?branch=dev
     :target: https://travis-ci.org/tommilligan/WhatColorIsX
@@ -55,12 +53,18 @@ to ``True``, it is guaranteed that a bright colour will be returned. If
 bright_hue is not set, it is likely that some whites, greys or blacks will be
 returned.
 
+Files can have their colour detected by raising the ``-f`` flag and providing the
+path to the image file (see example below).
+
+The number of images google searched for before giving up and erroring can be
+specified with ``--images_to_try`` and an integer. Default is 10.
+
 The `colour module`_ can be used to easily perform further alterations.
 
 .. _colour module: https://github.com/vaab/colour
 
 Import to your project
-""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^
 ::
 
     from WhatColorIsX import whatcoloris
@@ -68,9 +72,10 @@ Import to your project
     brick_color = whatcoloris('brick')
     fish_color_bright = whatcoloris('fish', bright_hue=True)
     my_cat_colour = whatcoloris('my images/cat.jpg', is_file=True)
+    pineapple_colour = whatcoloris('pineapple', images_to_try=100)
 
 Run from the command line
-"""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When installed, the script can be accessed with the ``whatcoloris`` command. Usage::
 
@@ -83,6 +88,9 @@ When installed, the script can be accessed with the ``whatcoloris`` command. Usa
       -h, --help        show this help message and exit
       -b, --bright_hue  return a bright colour; hsl=(x,1.0,0.5)
       -f, --is_file     treat x as a file path to open locally
+      --images_to_try IMAGES_TO_TRY
+                        number of images to try processing before erroring
+
 
 
 ::
@@ -97,14 +105,26 @@ It can also be called directly::
     $ python WhatColorIsX.py grass -b
     #65ff00
 
+Errors
+------
+
+If the search does not find a suitable image to process, the
+``WhatColorIsX.InvalidSearchResults`` exception will be raised. Examples that
+cause this error include::
+
+    from WhatColorIsX import whatcoloris
+    
+    no_search_string = whatcoloris('')
+    no_images_returned = whatcoloris('foo', images_to_try=0)
 
 Additional Scripts
 ------------------
+
 These scripts will not be installed automatically, but can be downloaded
 directly from GitHub if desired
 
 xml
-"""
+^^^
 
 ``xmlInterface.py`` allows ``WhatColorIsX`` to interface with a correctly
 formatted XML file. This allows multiple values to be queued for processing.
