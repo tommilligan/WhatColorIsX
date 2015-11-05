@@ -43,6 +43,11 @@ Installation
 You may find you need to ``pip install Pillow`` as a dependency first, although
 it will be attempted automatically.
 
+Docs
+----
+
+Full documentation is hosted at http://whatcolorisx.readthedocs.org
+
 Usage
 -----
 
@@ -117,6 +122,30 @@ cause this error include::
     no_search_string = whatcoloris('')
     no_images_returned = whatcoloris('foo', images_to_try=0)
 
+Development
+-----------
+
+WhatColorIsX can be installed for development as normal:
+
+    * clone the GitHub repo
+    * run ``python setup.py develop``
+    * install dev dependencies using ``pip install -r requirements_dev.txt``.
+
+Please ensure any new code you write:
+
+    * is documented
+        * has docstrings in the source code
+        * is added to the ``docs`` (prefably using autodoc)
+        * ``sphinx-build -b html . ./_build`` to check html output
+
+    * is covered by tests
+        * write tests and add them to ``tests``
+        * run tests using ``nosetests`` or
+          ``coverage run source=WhatColorIsX.py setup.py test``
+        * check coverage using ``coverage report``
+
+Pull Requests are always welcome!
+    
 Additional Scripts
 ------------------
 

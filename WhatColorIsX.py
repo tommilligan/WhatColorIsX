@@ -1,4 +1,4 @@
-#!/usr/bin/env/python
+#!/usr/bin/env python3
 
 import argparse
 import json
@@ -13,15 +13,16 @@ from PIL import Image
 
 
 class InvalidSearchResults(Exception):
+    """
+    Raised if no valid image is returned by Google Search
+    """
     pass
 
 def average_image_color(img):
     """
-    Takes image, returns average colour [`StackOverflow`_].
+    Takes image, returns average colour.
     
-    .. _StackOverflow: http://stackoverflow.com/questions/29726148/finding-average-color-using-python
-    
-	:param i: A `PIL.Image.Image` object
+    :param i: A ``PIL.Image.Image`` object
     :returns: RGB value in a three-member tuple
     :rtype: tuple
     """
@@ -42,17 +43,16 @@ def average_image_color(img):
 
 def search_image(search_string, images_to_try=10):
     """
-    Takes string, returns image using the `Google Custom API`_ [`StackOverflow`_].
+    Takes string, returns image using the `Google Custom API`_.
     
     .. _Google Custom API: https://developers.google.com/custom-search/docs/xml_results
-    .. _StackOverflow: http://stackoverflow.com/questions/20716842/python-download-images-from-google-image-search
     
-	:param search_string: The string to find image of
-    :param images_to_try: The number of images to try processing before raising
-                          `InvalidSearchResults`
-    :returns: A `PIL.Image.Image` object
-    :rtype: `PIL.Image.Image`
-    :raises: `WhatColorIsX.InvalidSearchResults` if no valid image is returned
+    :param string search_string: The string to find image of
+    :param int images_to_try: The number of images to try processing before raising
+                          :py:exc:`~WhatColorIsX.InvalidSearchResults`
+    :returns: An image corresponding to string_search
+    :rtype: ``PIL.Image.Image``
+    :raises: :py:exc:`~WhatColorIsX.InvalidSearchResults` if no valid image is returned
              by the search
     """
     start_index = 0
@@ -85,13 +85,15 @@ def search_image(search_string, images_to_try=10):
 
 def whatcoloris_image(img, bright_hue=False):
     """
-    Takes a `PIL.Image.Image` object and returns it's average colour.
+    Takes a ``PIL.Image.Image`` object and returns it's average colour.
     
     If bright_hue is set to True, a bright hue will be returned.
     
-    :param searchTerm: A `PIL.Image.Image` object to get colour of
-    :param bool bright_hue: force a bright colour value (hsl = [0.0-1.0], 1.0, 0.5)
-    :returns: the guessed colour of the input string in 6-digit hexadecimal format (#[0-9a-f]{6})
+    :param img: A ``PIL.Image.Image`` object to get colour of
+    :param bool bright_hue: force a bright colour value
+                            *(saturation = 1.0, luminance = 0.5)*
+    :returns: the guessed colour of the input string in 6-digit hexadecimal format
+              *(e.g. #ffffff)*
     :rtype: string
     """
     avg = average_image_color(img)
@@ -103,19 +105,28 @@ def whatcoloris_image(img, bright_hue=False):
     
 def whatcoloris(search_string, bright_hue=False, is_file=False, images_to_try=10):
     """
-    Takes a string and guesses it's colour using Google image search.
+    Takes a string and returns it's colour using Google image search.
     
     If bright_hue is set to True, a bright hue will be returned.
     
+    A specific file can be processed by providing the file path as search_string
+    and setting is_file to True.
+    
+    This function can be accessed from the command line by calling the
+    :ref:`whatcoloris_command`.
+    
     :param string search_string: string to get colour of
-    :param bool bright_hue: force a bright colour value (hsl = [0.0-1.0], 1.0, 0.5)
+    :param bool bright_hue: force a bright colour value
+                            *(saturation = 1.0, luminance = 0.5)*
     :param int images_to_try: The number of images to try processing before raising
-                              `InvalidSearchResults`. Not used if `is_file=True`
+                              :py:exc:`~WhatColorIsX.InvalidSearchResults`.
+                              No effect if ``is_file=True``
     :param bool is_file: treat search_string as a file path to open locally
-    :returns: the guessed colour of the input string in 6-digit hexadecimal format (#[0-9a-f]{6})
+    :returns: the guessed colour of the input string in 6-digit hexadecimal format
+              *(e.g. #ffffff)*
     :rtype: string
-    :raises: `WhatColorIsX.InvalidSearchResults` if no valid image is returned
-             by the search
+    :raises: :py:exc:`~WhatColorIsX.InvalidSearchResults` if no valid image
+             is returned by Google Search
     """
     if is_file:
         print(search_string)
