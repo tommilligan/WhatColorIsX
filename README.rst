@@ -1,11 +1,6 @@
 WhatColorIsX
 ============
 
-Python script which takes any string and returns a hex colour string, using Google
-image search.
-
-**master:**
-
 .. image:: https://img.shields.io/pypi/pyversions/WhatColorIsX.svg
     :target: https://pypi.python.org/pypi/WhatColorIsX
     :alt: Supported Python versions
@@ -14,6 +9,10 @@ image search.
     :target: https://pypi.python.org/pypi/WhatColorIsX/
     :alt: Latest PyPI version
 
+.. image:: https://readthedocs.org/projects/whatcolorisx/badge/?version=stable
+    :target: http://whatcolorisx.readthedocs.org/en/stable/?badge=stable
+    :alt: ReadTheDocs Documentation Status
+    
 .. image:: https://travis-ci.org/tommilligan/WhatColorIsX.svg?branch=master
     :target: https://travis-ci.org/tommilligan/WhatColorIsX
     :alt: Travis CI build status
@@ -21,17 +20,9 @@ image search.
 .. image:: https://coveralls.io/repos/tommilligan/WhatColorIsX/badge.svg?branch=master&service=github
     :target: https://coveralls.io/github/tommilligan/WhatColorIsX?branch=master
     :alt: Coveralls coverage status
-    
-**dev:**
 
-.. image:: https://travis-ci.org/tommilligan/WhatColorIsX.svg?branch=dev
-    :target: https://travis-ci.org/tommilligan/WhatColorIsX
-    :alt: Travis CI build status
-
-.. image:: https://coveralls.io/repos/tommilligan/WhatColorIsX/badge.svg?branch=dev&service=github
-    :target: https://coveralls.io/github/tommilligan/WhatColorIsX?branch=dev
-    :alt: Coveralls coverage status
-
+Python script which takes any string and returns a hex colour string, using Google
+image search.
 
 Installation
 ------------
@@ -125,6 +116,18 @@ cause this error include::
 Development
 -----------
 
+.. image:: https://readthedocs.org/projects/whatcolorisx/badge/?version=dev
+    :target: http://whatcolorisx.readthedocs.org/en/stable/?badge=stable
+    :alt: ReadTheDocs Documentation Status
+
+.. image:: https://travis-ci.org/tommilligan/WhatColorIsX.svg?branch=dev
+    :target: https://travis-ci.org/tommilligan/WhatColorIsX
+    :alt: Travis CI build status
+
+.. image:: https://coveralls.io/repos/tommilligan/WhatColorIsX/badge.svg?branch=dev&service=github
+    :target: https://coveralls.io/github/tommilligan/WhatColorIsX?branch=dev
+    :alt: Coveralls coverage status
+    
 WhatColorIsX can be installed for development as normal:
 
     * clone the GitHub repo

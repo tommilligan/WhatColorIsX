@@ -1,6 +1,18 @@
 Development
 ===========
 
+.. image:: https://readthedocs.org/projects/whatcolorisx/badge/?version=dev
+    :target: http://whatcolorisx.readthedocs.org/en/stable/?badge=stable
+    :alt: ReadTheDocs Documentation Status
+
+.. image:: https://travis-ci.org/tommilligan/WhatColorIsX.svg?branch=dev
+    :target: https://travis-ci.org/tommilligan/WhatColorIsX
+    :alt: Travis CI build status
+
+.. image:: https://coveralls.io/repos/tommilligan/WhatColorIsX/badge.svg?branch=dev&service=github
+    :target: https://coveralls.io/github/tommilligan/WhatColorIsX?branch=dev
+    :alt: Coveralls coverage status
+
 Installation
 ------------
 
