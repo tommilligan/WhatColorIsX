@@ -22,7 +22,7 @@ def average_image_color(img):
     """
     Takes image, returns average colour.
     
-    :param i: A ``PIL.Image.Image`` object
+    :param img: A ``PIL.Image.Image`` object
     :returns: RGB value in a three-member tuple
     :rtype: tuple
     """
