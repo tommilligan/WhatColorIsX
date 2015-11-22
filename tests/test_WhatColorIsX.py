@@ -2,6 +2,7 @@ import os
 
 from WhatColorIsX import whatcoloris, InvalidSearchResults
 from PIL import Image
+import re
 from nose.tools import assert_raises
 
 
@@ -36,31 +37,19 @@ def test_input_strings_invalid():
     """
     Test known invalid searches that should raise `WhatColorIsX.InvalidSearchResults`
     """
-    assert_raises(InvalidSearchResults, whatcoloris, 'aslkdjfhskjghsdkjghalkjdsghskljahflksjdhfalksjhgkljsdhgkjfhalsjdhlaskjhadglkhasdfa')
+    assert_raises(InvalidSearchResults, whatcoloris, 'aslkdjfhskjghsdkjghalkjdsghskljahflksjdhfalksjhgasdfjaksjdgfajsdhgfjaksdghfkljsdhgkjfhalsjdhlaskjhadglkhasdfa')
     assert_raises(InvalidSearchResults, whatcoloris, '')
     assert_raises(InvalidSearchResults, whatcoloris, 'sky', images_to_try=0)
 
 
 def test_input_strings():
     """
-    Test known valid searches that should consistently produce the same result. **These may change over time.**`
+    Test known valid searches that should produce a valid 6 digit hex output.
     """
-    known_values = {'sky': '#779bb9',
-                    'grass': '#3e850f',
-                    'sun': '#873107',
-                    'earth': '#363a4c'}
-    for k, v in known_values.items():
-        assert whatcoloris(k) == v
+    hex_format = re.compile(r'^#[0-9a-f]{6}$')
+    assert hex_format.match(whatcoloris('sky'))
+    assert hex_format.match(whatcoloris('grass'))
+    assert hex_format.match(whatcoloris('sun', bright_hue=True))
+    assert hex_format.match(whatcoloris('earth', bright_hue=True))
 
-
-def test_input_strings_bright():
-    """
-    Test known valid searches with `bright_hue=True` that should consistently produce the same result. **These may change over time.**`
-    """
-    known_values = {'sky': '#008aff',
-                    'grass': '#65ff00',
-                    'sun': '#ff5400',
-                    'earth': '#0029ff'}
-    for k, v in known_values.items():
-        assert whatcoloris(k, bright_hue=True) == v
 
