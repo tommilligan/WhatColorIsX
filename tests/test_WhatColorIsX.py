@@ -18,7 +18,8 @@ def test_known_images():
                     'ladybird.jpg': '#833911',
                     'tulip.png': '#e3800e'}
     for k, v in known_images.items():
-        assert WhatColorIsX.whatcoloris(os.path.join(TEST_IMAGES_DIR, k), is_file=True) == v
+        wcix = WhatColorIsX.new(os.path.join(TEST_IMAGES_DIR, k))
+        assert wcix.color() == v
 
 
 def test_known_images_bright():
@@ -30,8 +31,8 @@ def test_known_images_bright():
                     'ladybird.jpg': '#ff5900',
                     'tulip.png': '#ff8900'}
     for k, v in known_images.items():
-        assert WhatColorIsX.whatcoloris(os.path.join(TEST_IMAGES_DIR, k), bright_hue=True, is_file=True) == v
-
+        wcix = WhatColorIsX.new(os.path.join(TEST_IMAGES_DIR, k))
+        assert wcix.color(bright_hue=True) == v
 
 def test_known_images_common():
     """
@@ -42,7 +43,8 @@ def test_known_images_common():
                     'ladybird.jpg': '#961801',
                     'tulip.png': '#eedb13'}
     for k, v in known_images.items():
-        assert WhatColorIsX.whatcoloris(os.path.join(TEST_IMAGES_DIR, k), is_file=True, method=WhatColorIsX.common_image_color) == v
+        wcix = WhatColorIsX.new(os.path.join(TEST_IMAGES_DIR, k))
+        assert wcix.color(method='common_color') == v
 
 
 def test_known_images_common_bright():
@@ -54,26 +56,32 @@ def test_known_images_common_bright():
                     'ladybird.jpg': '#ff2700',
                     'tulip.png': '#ffe900'}
     for k, v in known_images.items():
-        assert WhatColorIsX.whatcoloris(os.path.join(TEST_IMAGES_DIR, k), is_file=True, method=WhatColorIsX.common_image_color, bright_hue=True) == v
+        wcix = WhatColorIsX.new(os.path.join(TEST_IMAGES_DIR, k))
+        assert wcix.color(method='common_color', bright_hue=True) == v
 
 
 def test_strings_invalid():
     """
     Test known invalid searches that should raise `WhatColorIsX.InvalidSearchResults`
     """
-    assert_raises(WhatColorIsX.InvalidSearchResults, WhatColorIsX.whatcoloris, 'aslkdjfhskjghsdkjghalkjdsghskljahflksjdhfalksjhgasdfjaksjdgfajsdhgfjaksdghfkljsdhgkjfhalsjdhlaskjhadglkhasdfa')
-    assert_raises(WhatColorIsX.InvalidSearchResults, WhatColorIsX.whatcoloris, '')
-    assert_raises(WhatColorIsX.InvalidSearchResults, WhatColorIsX.whatcoloris, 'sky', images_to_try=0)
+    known_invalid_search_errors = [('aslkdjfhskjghsdkjghalkjdsghskljahflksjdhfalksjhgasdfjaksjdgfajsdhgfjaksdghfkljsdhgkjfhalsjdhlaskjhadglkhasdfa', 10),
+                                   ('', 10),
+                                   ('sky', 0)]
+    for s in known_invalid_search_errors:
+        assert_raises(WhatColorIsX.InvalidSearchResults, WhatColorIsX.new, s[0], images_to_try=s[1])
 
 
 def test_strings():
     """
     Test known valid searches that should produce a valid 6 digit hex output.
     """
+    known_valid_seatches = [('sky', False),
+                            ('grass', False),
+                            ('sun', True),
+                            ('earth', True)]
     hex_format = re.compile(r'^#[0-9a-f]{6}$')
-    assert hex_format.match(WhatColorIsX.whatcoloris('sky'))
-    assert hex_format.match(WhatColorIsX.whatcoloris('grass'))
-    assert hex_format.match(WhatColorIsX.whatcoloris('sun', bright_hue=True))
-    assert hex_format.match(WhatColorIsX.whatcoloris('earth', bright_hue=True))
+    for s in known_valid_seatches:
+        wcix = WhatColorIsX.new(s[0])
+        assert hex_format.match(wcix.color(bright_hue=s[1]))
 
 

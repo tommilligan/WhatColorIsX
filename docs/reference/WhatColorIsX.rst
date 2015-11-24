@@ -4,26 +4,38 @@
 :py:mod:`~WhatColorIsX` Module
 ==============================
 
-The :py:mod:`~WhatColorIsX` module provides functions for determining the colour of
-a string or image.
-    
-Functions
----------
+The :py:mod:`~WhatColorIsX` module provides an object of the same name (lowercase), which can
+determining the colour of:
 
-.. autofunction:: WhatColorIsX.whatcoloris
+    * A string
+    * A local file
+    * A ``PIL.Image.Image``
+    
+The :py:class:`~WhatColorIsX.whatcolorisx` Class
+------------------------------------------------
+
+.. autoclass:: WhatColorIsX.whatcolorisx
+
+Methods
+^^^^^^^
+
+.. automethod:: whatcolorisx.color
+
+Helper methods
+""""""""""""""
+
+.. automethod:: whatcolorisx.average_color
+.. automethod:: whatcolorisx.common_color
+
+Attributes
+^^^^^^^^^^
+
+.. py:attribute:: whatcolorisx.img
+
+    The ``PIL.Image.Image`` image which is used to determine colour.
 
 Exceptions
 ----------
 
 .. autoexception:: WhatColorIsX.InvalidSearchResults
 
-Helper functions
-----------------
-
-These were not written to be called directly, but you may find them useful
-(e.g. if you want a ``PIL.Image.Image`` object as an input or output)
-
-.. autofunction:: WhatColorIsX.whatcoloris_image
-.. autofunction:: WhatColorIsX.search_image
-.. autofunction:: WhatColorIsX.average_image_color
-.. autofunction:: WhatColorIsX.common_image_color
