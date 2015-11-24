@@ -22,17 +22,34 @@ WhatColorIsX can be installed for development as normal:
     * run ``python setup.py develop``
     * install dev dependencies using ``pip install -r requirements_dev.txt``.
 
+Roadmap
+-------
+
+Some ideas:
+
+    * improve relevance of colour value
+        
+        * discard/differentiate background
+        * look at center of image
+        
+    * return list of *n* colour suggestions
+    
+        * use multiple images *(heavy internet, light computation)*
+        * use clustering/peak detection *(light internet, heavy computation/installation size)*
+
 Guidelines
 ----------
 
 Please ensure any new code you write:
 
     * is documented
+    
         * has docstrings in the source code
-        * is added to the ``docs`` (prefably using autodoc)
+        * is added to the ``docs`` (prefrably using autodoc)
         * ``sphinx-build -b html . ./_build`` to check html output
 
     * is covered by tests
+    
         * write tests and add them to ``tests``
         * run tests using ``nosetests`` or
           ``coverage run source=WhatColorIsX.py setup.py test``

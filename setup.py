@@ -1,11 +1,15 @@
 from setuptools import setup
+import os
+
 
 version = '1.0.2'
 
+
 # Call this to get README
 def readme():
-    with open('README.rst') as f:
+    with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as f:
         return f.read()
+
 
 setup(name='WhatColorIsX',
       version=version,
@@ -29,8 +33,8 @@ setup(name='WhatColorIsX',
       keywords='colour color google image text search find get string',
       py_modules=['WhatColorIsX'],
       install_requires=[
-          'colour',
-          'Pillow'
+        'colour',
+        'Pillow'
       ],
       entry_points={
         'console_scripts': [

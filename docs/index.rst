@@ -21,10 +21,15 @@ WhatColorIsX
     :target: https://coveralls.io/github/tommilligan/WhatColorIsX?branch=master
     :alt: Coveralls coverage status
 
+WhatColorIsX is a simple python module that aims to answer one question well -
+what colour is this string? Useful for automating colour generation for multiple
+items, WhatColorIsX can also be used to examine local files.
+    
 .. note:: All variable, function and object names in WhatColorIsX use the American
     spelling, **color**, for consistency with other code.
 
 Contents:
+---------
 
 .. toctree::
    :maxdepth: 2
@@ -36,7 +41,7 @@ Contents:
    development.rst
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`

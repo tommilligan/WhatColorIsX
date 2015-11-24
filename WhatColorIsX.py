@@ -7,6 +7,7 @@ import urllib.parse
 import urllib.request
 import io
 import math
+import operator
 
 from colour import Color
 from PIL import Image
@@ -18,9 +19,12 @@ class InvalidSearchResults(Exception):
     """
     pass
 
+
 def average_image_color(img):
     """
     Takes image, returns average colour.
+    
+    Recommended for most uses.
     
     :param img: A ``PIL.Image.Image`` object
     :returns: RGB value in a three-member tuple
@@ -39,6 +43,22 @@ def average_image_color(img):
         sum( i*w for i, w in enumerate(g) ) / sum(g),
         sum( i*w for i, w in enumerate(b) ) / sum(b)
     )
+
+    
+def common_image_color(img):
+    """
+    Takes image, returns the most common colour.
+    
+    Not recommended for complex images which may be over or under-exposed; there
+    is a high chance a black or white color will be returned.
+    
+    :param img: A ``PIL.Image.Image`` object
+    :returns: RGB value in a three-member tuple
+    :rtype: tuple
+    """
+    img = img.convert('RGB')
+    colors = sorted(img.getcolors(img.width*img.height), key=operator.itemgetter(0), reverse=True)
+    return colors[0][1]
 
 
 def search_image(search_string, images_to_try=10):
@@ -83,8 +103,8 @@ def search_image(search_string, images_to_try=10):
             raise InvalidSearchResults('No valid image could be found')
     raise InvalidSearchResults('No valid image could be found')
 
-def whatcoloris_image(img, bright_hue=False):
-    """
+def whatcoloris_image(img, bright_hue=False, method=average_image_color):
+    """whatcoloris_image(img, bright_hue=False, method=average_image_color)
     Takes a ``PIL.Image.Image`` object and returns it's average colour.
     
     If bright_hue is set to True, a bright hue will be returned.
@@ -92,19 +112,22 @@ def whatcoloris_image(img, bright_hue=False):
     :param img: A ``PIL.Image.Image`` object to get colour of
     :param bool bright_hue: force a bright colour value
                             *(saturation = 1.0, luminance = 0.5)*
+    :param method: The helper function that will pick the colour from the image.
+                   Options are :py:func:`~WhatColorIsX.average_image_color` or
+                   :py:func:`~WhatColorIsX.common_image_color`
     :returns: the guessed colour of the input string in 6-digit hexadecimal format
               *(e.g. #ffffff)*
     :rtype: string
     """
-    avg = average_image_color(img)
-    color = Color(rgb=[float(avg[x])/255.0 for x in range(3)])
+    picked = method(img)
+    color = Color(rgb=[float(picked[x])/255.0 for x in range(3)])
     if bright_hue is True:
         color = Color(hue=color.hue, saturation=1.0, luminance=0.5)
     return color.hex_l
 
     
-def whatcoloris(search_string, bright_hue=False, is_file=False, images_to_try=10):
-    """
+def whatcoloris(search_string, bright_hue=False, is_file=False, images_to_try=10, method=average_image_color):
+    """whatcoloris(search_string, bright_hue=False, is_file=False, images_to_try=10, method=average_image_color)
     Takes a string and returns it's colour using Google image search.
     
     If bright_hue is set to True, a bright hue will be returned.
@@ -122,6 +145,9 @@ def whatcoloris(search_string, bright_hue=False, is_file=False, images_to_try=10
                               :py:exc:`~WhatColorIsX.InvalidSearchResults`.
                               No effect if ``is_file=True``
     :param bool is_file: treat search_string as a file path to open locally
+    :param method: The helper function that will pick the colour from the image.
+                   Options are :py:func:`~WhatColorIsX.average_image_color` or
+                   :py:func:`~WhatColorIsX.common_image_color`
     :returns: the guessed colour of the input string in 6-digit hexadecimal format
               *(e.g. #ffffff)*
     :rtype: string
@@ -129,11 +155,10 @@ def whatcoloris(search_string, bright_hue=False, is_file=False, images_to_try=10
              is returned by Google Search
     """
     if is_file:
-        print(search_string)
         img = Image.open(search_string)
     else:
         img = search_image(search_string, images_to_try=images_to_try)
-    return whatcoloris_image(img, bright_hue=bright_hue)
+    return whatcoloris_image(img, bright_hue=bright_hue, method=method)
 
 
 def main():
@@ -144,11 +169,20 @@ def main():
                         help='return a bright colour; hsl=(x,1.0,0.5)')
     parser.add_argument('-f', '--is_file', action='store_true',
                         help='treat x as a file path to open locally')
+    parser.add_argument('-m', '--method', choices=['average', 'common'],
+                        help='Method to use for colour picking. Defaults to AVERAGE')
     parser.add_argument('--images_to_try', type=int, default=10,
                         help='number of images to try processing before erroring')
     args = parser.parse_args()
+    
+    if args.method == 'common':
+        method = common_image_color
+    else:
+        method = average_image_color
+    
     return whatcoloris(args.x, bright_hue=args.bright_hue,
-                       is_file=args.is_file, images_to_try=args.images_to_try)
+                       is_file=args.is_file, images_to_try=args.images_to_try,
+                       method=method)
 
   
 if __name__ == '__main__':

@@ -26,4 +26,4 @@ These were not written to be called directly, but you may find them useful
 .. autofunction:: WhatColorIsX.whatcoloris_image
 .. autofunction:: WhatColorIsX.search_image
 .. autofunction:: WhatColorIsX.average_image_color
-
+.. autofunction:: WhatColorIsX.common_image_color

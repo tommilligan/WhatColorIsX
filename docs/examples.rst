@@ -43,3 +43,16 @@ It can also be called directly::
 
     $ python WhatColorIsX.py grass -b
     #65ff00
+
+Visual Demo
+-----------
+
+Using `this python script`_, a folder of image files can be composited along
+with their calculated colours. The main function of WhatColorIsX is to do this
+*without* a source image, using only a string.
+
+.. _this python script: https://gist.github.com/tommilligan/b7c7bd0bb955e5843c6d
+
+See an example output `here`_.
+
+.. _here: http://tommilligan.github.io/#WhatColorIsX
