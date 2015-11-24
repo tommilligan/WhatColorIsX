@@ -30,9 +30,13 @@ Helper methods
 Attributes
 ^^^^^^^^^^
 
+.. py:attribute:: whatcolorisx.input
+
+    The initial input to the :py:class:`~WhatColorIsX.whatcolorisx` object.
+
 .. py:attribute:: whatcolorisx.img
 
-    The ``PIL.Image.Image`` image which is used to determine colour.
+    The ``PIL.Image.Image`` image generated from :py:attr:`~WhatColorIsX.whatcolorisx.input`.
 
 Exceptions
 ----------

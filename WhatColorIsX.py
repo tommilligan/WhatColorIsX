@@ -37,6 +37,7 @@ class whatcolorisx(object):
     """
     
     def __init__(self, input, images_to_try=10):
+        self.input = input
         if isinstance(input, Image.Image):
             self.img = input
         elif input.lower().endswith(('.jpg', '.png')):
@@ -62,7 +63,7 @@ class whatcolorisx(object):
         start_index = 0
         results_per_search = 4 # Max 20
         search_attempts = int(math.ceil(images_to_try/results_per_search))
-        search_string_safe = urllib.parse.quote_plus(self.search)
+        search_string_safe = urllib.parse.quote_plus(self.input)
         for attempt in range(search_attempts):
             images_already_searched = attempt*results_per_search
             searchUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&start={0}&num={1}&q={2}".format(
